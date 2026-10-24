@@ -9,6 +9,15 @@ import model.Funcionario;
  */
 public class AuthenticationManager {
     private static Stack<Funcionario> autenticationStack = new Stack<>();
+    private static Funcionario funcionarioLogado;
+
+    public static void setFuncionarioLogado(Funcionario funcionario) {
+        funcionarioLogado = funcionario;
+    }
+
+    public static Funcionario getFuncionarioLogado() {
+        return funcionarioLogado;
+    }
 
     /**
      * Carrega todos os funcionários na pilha para validação
@@ -51,16 +60,16 @@ public class AuthenticationManager {
             System.out.println("  - Match de nome? " + (func.getNome() != null && func.getNome().equals(usuario)));
             
             if (func.getSenha() != null) {
-                System.out.println("  - Senha do funcionário: '" + func.getSenha() + "' (length: " + func.getSenha().length() + ")");
+                System.out.println("  - Senha do funcionário: <hash> (length: " + func.getSenha().length() + ")");
             } else {
                 System.out.println("  - Senha do funcionário: NULL");
             }
-            System.out.println("  - Senha buscada: '" + senha + "' (length: " + senha.length() + ")");
-            System.out.println("  - Match de senha? " + (func.getSenha() != null && func.getSenha().equals(senha)));
+            System.out.println("  - Senha buscada: <hidden> (length: " + (senha != null ? senha.length() : 0) + ")");
+            System.out.println("  - Match de senha? [verificação por hash]");
 
             // Verifica se o nome do usuário e a senha correspondem
             if (func.getNome() != null && func.getNome().equals(usuario) &&
-                func.getSenha() != null && func.getSenha().equals(senha)) {
+                func.getSenha() != null && util.PasswordHasher.verify(senha, func.getSenha())) {
                 funcionarioValidado = func;
                 System.out.println("[STACK AUTH] ✓ MATCH ENCONTRADO!");
                 break;

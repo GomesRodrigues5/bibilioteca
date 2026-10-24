@@ -1,0 +1,1 @@
+        resultado.sort((a, b) - - a.getTotalEmprestimos()); 

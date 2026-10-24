@@ -1,0 +1,1 @@
+        btnFiltrar.addActionListener(e -, resumoPanel, txtDataDe.getText().trim(), txtDataAte.getText().trim())); 

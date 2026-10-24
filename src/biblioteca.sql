@@ -60,17 +60,31 @@ CREATE TABLE Estudante (
 
 CREATE TABLE Armario (
     id_armario INT AUTO_INCREMENT PRIMARY KEY,
-    armario VARCHAR(50) NOT NULL
+    armario VARCHAR(50) NOT NULL,
+    Partileira VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE Livro (
     id_livro INT AUTO_INCREMENT PRIMARY KEY,
     titulo VARCHAR(200) NOT NULL,
+    subtitulo VARCHAR(200) NOT NULL,
+    autor VARCHAR(200) NOT NULL,
+    edicao VARCHAR(200) NOT NULL,
+    isbn VARCHAR(100) NOT NULL,
+    issn VARCHAR(200) NOT NULL,
+    cdn VARCHAR(200) NOT NULL,
+    data_lançamento DATE,
+    material VARCHAR(200) NOT NULL,
+    ilustracao VARCHAR(200) NOT NULL,
+    comprimento INT,
+    largura INT,
     cor VARCHAR(30),
     pagina INT,
     codigo VARCHAR(50) UNIQUE NOT NULL,
     id_armario INT,
     disponivel BOOLEAN DEFAULT TRUE,
+    capadoLivro LONGBLOB NOT NULL, /*guarda imagem ficheiro em BITS*/
+    PDF LONGBLOB NOT NULL,  /*guarda imagem ficheiro em BITS*/
     FOREIGN KEY (id_armario) REFERENCES Armario(id_armario)
 );
 
@@ -111,3 +125,7 @@ CREATE TABLE Atendimento (
     FOREIGN KEY (id_estudante) REFERENCES Estudante(id_estudante),
     FOREIGN KEY (id_computador) REFERENCES Computador(id_computador)
 );
+
+ALTER TABLE Armario add column Partileira VARCHAR(50) NOT NULL;
+ALTER TABLE Livro add column CapadoLivro LONGBLOB NOT NULL;
+ALTER TABLE Livro add column PDF LONGBLOB NOT NULL;

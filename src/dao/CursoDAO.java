@@ -77,4 +77,21 @@ public class CursoDAO {
         }
         return null;
     }
+
+    public Curso buscarPorId(int idCurso) throws SQLException {
+        String sql = "SELECT c.id_curso, c.curso, d.departamento FROM Curso c LEFT JOIN Departamento d ON c.id_departamento = d.id_departamento WHERE c.id_curso = ?";
+        try (Connection conn = ConexaoMySQL.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, idCurso);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    Curso curso = new Curso();
+                    curso.setIdCurso(rs.getInt("id_curso"));
+                    curso.setCurso(rs.getString("curso"));
+                    curso.setDepartamento(rs.getString("departamento"));
+                    return curso;
+                }
+            }
+        }
+        return null;
+    }
 }

@@ -62,4 +62,11 @@ public class FuncionarioController {
     public Funcionario buscarPorNome(String nome) throws SQLException {
         return funcionarioDAO.buscarPorNome(nome);
     }
+
+    /**
+     * Busca um funcionário por ID
+     */
+    public Funcionario buscarPorId(int idFuncionario) throws SQLException {
+        return funcionarioDAO.buscarPorId(idFuncionario);
+    }
 }

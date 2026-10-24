@@ -1,0 +1,1 @@
+                contactos.sort((a, b) -, a.getIdContacto())); 

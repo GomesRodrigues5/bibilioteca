@@ -32,4 +32,25 @@ public class EstudanteController {
             return null;
         }
     }
+
+    public Estudante buscarPorId(int idEstudante) {
+        try {
+            return estudanteDAO.buscarPorId(idEstudante);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
+
+    public void atualizarEstudante(Estudante estudante) throws SQLException {
+        estudanteDAO.atualizar(estudante);
+    }
+
+    public List<EstudanteDAO.EnderecoItem> listarEnderecos() throws SQLException {
+        return estudanteDAO.listarEnderecos();
+    }
+
+    public List<EstudanteDAO.ContactoItem> listarContactos() throws SQLException {
+        return estudanteDAO.listarContactos();
+    }
 }
