@@ -3503,35 +3503,31 @@ public class TelaPrincipalAdmin extends JFrame {
             return;
         }
         int idLivro = Integer.parseInt(livrosTableModel.getValueAt(row, 0).toString());
-        try {
-            Livro livro = livroDAO.buscarPorId(idLivro);
-            if (livro == null) {
-                JOptionPane.showMessageDialog(this, "Livro não encontrado.", "Erro", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-            String detalhes = "ID: " + livro.getIdLivro() + "\n" +
-                    "Título: " + livro.getTitulo() + "\n" +
-                    "Subtítulo: " + livro.getSubtitulo() + "\n" +
-                    "Autor: " + livro.getAutor() + "\n" +
-                    "Edição: " + livro.getEdicao() + "\n" +
-                    "ISBN: " + livro.getIsbn() + "\n" +
-                    "ISSN: " + livro.getIssn() + "\n" +
-                    "CDN: " + livro.getCdn() + "\n" +
-                    "Data Lançamento: " + (livro.getDataLancamento() != null ? livro.getDataLancamento().toString() : "") + "\n" +
-                    "Material: " + livro.getMaterial() + "\n" +
-                    "Ilustração: " + livro.getIlustracao() + "\n" +
-                    "Comprimento: " + livro.getComprimento() + "\n" +
-                    "Largura: " + livro.getLargura() + "\n" +
-                    "Cor: " + livro.getCor() + "\n" +
-                    "Páginas: " + livro.getPagina() + "\n" +
-                    "Código: " + livro.getCodigo() + "\n" +
-                    "Armário: " + livro.getArmarioNome() + "\n" +
-                    "Partileira: " + livro.getArmarioPartileira() + "\n" +
-                    "Disponível: " + (livro.isDisponivel() ? "Sim" : "Não");
-            JOptionPane.showMessageDialog(this, detalhes, "Detalhes do Livro", JOptionPane.INFORMATION_MESSAGE);
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this, "Erro ao carregar livro: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        Livro livro = livroDAO.buscarPorId(idLivro);
+        if (livro == null) {
+            JOptionPane.showMessageDialog(this, "Livro não encontrado.", "Erro", JOptionPane.ERROR_MESSAGE);
+            return;
         }
+        String detalhes = "ID: " + livro.getIdLivro() + "\n" +
+                "Título: " + livro.getTitulo() + "\n" +
+                "Subtítulo: " + livro.getSubtitulo() + "\n" +
+                "Autor: " + livro.getAutor() + "\n" +
+                "Edição: " + livro.getEdicao() + "\n" +
+                "ISBN: " + livro.getIsbn() + "\n" +
+                "ISSN: " + livro.getIssn() + "\n" +
+                "CDN: " + livro.getCdn() + "\n" +
+                "Data Lançamento: " + (livro.getDataLancamento() != null ? livro.getDataLancamento().toString() : "") + "\n" +
+                "Material: " + livro.getMaterial() + "\n" +
+                "Ilustração: " + livro.getIlustracao() + "\n" +
+                "Comprimento: " + livro.getComprimento() + "\n" +
+                "Largura: " + livro.getLargura() + "\n" +
+                "Cor: " + livro.getCor() + "\n" +
+                "Páginas: " + livro.getPagina() + "\n" +
+                "Código: " + livro.getCodigo() + "\n" +
+                "Armário: " + livro.getArmarioNome() + "\n" +
+                "Partileira: " + livro.getArmarioPartileira() + "\n" +
+                "Disponível: " + (livro.isDisponivel() ? "Sim" : "Não");
+        JOptionPane.showMessageDialog(this, detalhes, "Detalhes do Livro", JOptionPane.INFORMATION_MESSAGE);
     }
 
     private void editLivroRow(int row) {
@@ -3539,16 +3535,12 @@ public class TelaPrincipalAdmin extends JFrame {
             return;
         }
         int idLivro = Integer.parseInt(livrosTableModel.getValueAt(row, 0).toString());
-        try {
-            Livro livro = livroDAO.buscarPorId(idLivro);
-            if (livro == null) {
-                JOptionPane.showMessageDialog(this, "Livro não encontrado para edição.", "Erro", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-            showAdicionarLivroModal(livro);
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this, "Erro ao carregar livro: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        Livro livro = livroDAO.buscarPorId(idLivro);
+        if (livro == null) {
+            JOptionPane.showMessageDialog(this, "Livro não encontrado para edição.", "Erro", JOptionPane.ERROR_MESSAGE);
+            return;
         }
+        showAdicionarLivroModal(livro);
     }
 
     private void viewComputadorRow(int row) {
@@ -4638,4 +4630,3 @@ public class TelaPrincipalAdmin extends JFrame {
 
 
 }
-
